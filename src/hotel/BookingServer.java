@@ -8,10 +8,10 @@ public class BookingServer {
     public static void main(String[] args) {
         try {
             BookingManager manager = new BookingManager();
-            IBookingManager stub = (IBookingManager) UnicastRemoteObject.exportObject(manager, 1099);
+            IBookingManager stub = (IBookingManager) UnicastRemoteObject.exportObject(manager, 1101);
 
-//            Registry registry = LocateRegistry.createRegistry(1099);
-            Registry registry = LocateRegistry.getRegistry();
+            Registry registry = LocateRegistry.createRegistry(1100);
+//            Registry registry = LocateRegistry.getRegistry();
             registry.rebind("BookingManager", stub);
 
             System.out.println("BookingManager is ready.");

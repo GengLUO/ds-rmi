@@ -14,17 +14,19 @@ public class BookingClient extends AbstractScriptedSimpleTest {
 	private IBookingManager bm = null;
 
 	public static void main(String[] args) throws Exception {
-		BookingClient client = new BookingClient();
+		String host = (args.length < 1) ? "dskul.australiaeast.cloudapp.azure.com" : args[0];
+		int port = (args.length < 2) ? 1100: Integer.parseInt(args[1]);
+		BookingClient client = new BookingClient(host, port);
 		client.run();
 	}
 
 	/***************
 	 * CONSTRUCTOR *
 	 ***************/
-	public BookingClient() {
+	public BookingClient(String host, int port) {
 		try {
 			//Look up the registered remote instance
-			Registry registry = LocateRegistry.getRegistry("localhost", 1099);
+			Registry registry = LocateRegistry.getRegistry(host, port);
 //			bm = new BookingManager();
 			bm = (IBookingManager) registry.lookup("BookingManager");
 		} catch (Exception exp) {
